@@ -1,0 +1,36 @@
+/* Global variable */
+
+:root {
+  /* Color */
+  --color-primary: #d70018;
+  --color-white: #fff;
+  --color-black: #000;
+
+  /* Height */
+  --header-height: 6.4rem;
+}
+
+/* Setting all */
+
+* {
+  box-sizing: inherit;
+  list-style: none;
+  outline: none;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  padding-left: 0;
+}
+
+/* Setting html */
+
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+  line-height: 1.6rem;
+  box-sizing: border-box;
+}
