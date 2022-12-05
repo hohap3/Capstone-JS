@@ -1,0 +1,99 @@
+.header {
+  height: var(--header-height);
+  border-bottom: thin solid #dbdbdb;
+}
+
+.header__content {
+  height: 100%;
+  /* justify-content: space-between; */
+}
+
+.header__logo {
+  width: 20rem;
+  text-align: center;
+}
+
+.header__logo > a {
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.header__navbar-menu {
+  width: 100%;
+}
+
+.header__navbar .navbar-nav {
+  gap: 2.8rem;
+}
+
+.header__navbar {
+  flex: 1;
+  justify-content: center;
+}
+
+.header__navbar .nav-link {
+  font-size: 1.8rem;
+  color: var(--color-text);
+  text-transform: capitalize;
+  transition: all linear 0.5s;
+}
+
+.header__navbar .nav-item {
+  position: relative;
+}
+
+.header__navbar .nav-item::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 1rem 1rem;
+  border-style: solid;
+  border-color: transparent transparent var(--color-primary) transparent;
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.header__navbar .nav-item:hover > a {
+  color: var(--color-primary);
+}
+
+.header__navbar .nav-item:hover::after {
+  opacity: 1;
+}
+
+.header__cart {
+  gap: 2rem;
+}
+
+.header__search > i,
+.header__cart-button > i {
+  font-size: 2rem;
+}
+
+.header__search > i {
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.header__search:hover i {
+  color: var(--color-primary);
+}
+
+.header__cart-button {
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.header__cart-button i:hover {
+  color: var(--color-primary);
+  transition: all 0.5s;
+}
+
+.header__cart-price {
+  font-size: 1.6rem;
+  margin-left: 0.6rem;
+}
