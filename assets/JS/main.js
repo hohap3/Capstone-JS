@@ -19,7 +19,7 @@ function formatMoney(price) {
   return Number(price).toLocaleString();
 }
 
-async function fetchStudentList() {
+async function fetchProductList() {
   productList = [];
 
   try {
@@ -50,7 +50,7 @@ function renderProductList(productList) {
 
   for (var i = 0; i < productList.length; i++) {
     var productItem = productList[i];
-    html += `<div class="product__col col-lg-3">
+    html += `<div class="product__col col-lg-3 col-md-4 col-6 col-sm-6">
         <div class="product__item" " >
           <div class="product__item-link-image">
             <div
@@ -109,6 +109,8 @@ async function handleAddToCart(productId) {
 
     var productItem = promise.data;
 
+    var cartList = getLocalStorageData(CART_LOCAL_NAME);
+
     var cartItem = {
       product: {
         id: productItem.id,
@@ -121,15 +123,17 @@ async function handleAddToCart(productId) {
 
     // Nếu trong cart đã tồn tại thì ta ko push nữa , thay vào đó ta tăng quantity lên
     // Nếu productItem chưa có thì ta mới push vào
-    var indexCart = findIndexCart(productId);
-    if (indexCart < 0) cart.push(cartItem);
-    else cart[indexCart].quantity = cart[indexCart].quantity += 1;
+    var indexCart = findIndexCart(productId.toString());
+    if (indexCart < 0) cartList.push(cartItem);
+    else {
+      cartList[indexCart].quantity = cartList[indexCart].quantity += 1;
+    }
 
     // Save localStorage
 
-    saveLocalStorage(CART_LOCAL_NAME, cart);
+    saveLocalStorage(CART_LOCAL_NAME, cartList);
 
-    renderCart(cart);
+    renderCart(cartList);
 
     showCartInfo();
   } catch (error) {
@@ -255,7 +259,7 @@ function renderCart(cartList) {
     var cartItem = cartList[i];
     html += `<div class="cart__menu-item" data-id="${cartItem.product.id}">
       <div class="row g-4">
-        <div class="cart__menu-col col-lg-3">
+        <div class="cart__menu-col col-lg-3 col-md-3">
           <div class="cart__menu-item-image">
             <img
               class="img-fluid"
@@ -264,7 +268,7 @@ function renderCart(cartList) {
             />
           </div>
         </div>
-        <div class="cart__menu-col col-lg-7">
+        <div class="cart__menu-col col-lg-7 col-md-7">
           <div class="cart__menu-item-info">
             <h2>${cartItem.product.name}</h2>
           </div>
@@ -285,7 +289,7 @@ function renderCart(cartList) {
             )} VNĐ</p>
           </div>
         </div>
-        <div class="cart__menu-col col-lg-2">
+        <div class="cart__menu-col col-lg-2 col-md-2">
           <div class="cart__menu-item-remove">
             <button class="cart__menu-remove-btn" onclick=(handleDeleteCartItem(${
               cartItem.product.id
@@ -376,7 +380,7 @@ function clearAllItemCart() {
 }
 
 window.addEventListener("load", async function () {
-  await fetchStudentList();
+  await fetchProductList();
 
   cart = getLocalStorageData(CART_LOCAL_NAME);
 
