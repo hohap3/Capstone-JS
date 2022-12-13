@@ -8,35 +8,38 @@ function submitForm() {
 }
 
 async function createProduct() {
-  //validate form
-  if (!validateForm()) return;
-
-  // 1. DOM lấy input
-  var id = document.getElementById("productId").value;
-  var name = document.getElementById("productName").value;
-  var price = document.getElementById("productPrice").value;
-  var screen = document.getElementById("productScreen").value;
-  var backCamera = document.getElementById("productBackCamera").value;
-  var frontCamera = document.getElementById("productFrontCamera").value;
-  var img = document.getElementById("productImg").value;
-  var desc = document.getElementById("productDesc").value;
-  var type = document.getElementById("productType").value;
-  //2. tạo lớp đối tượng products
-  var product = new Product(
-    id,
-    name,
-    price,
-    screen,
-    backCamera,
-    frontCamera,
-    img,
-    desc,
-    type
-  );
   // gửi request lên api
+  var isValidate = validateForm();
+
+  console.log(isValidate);
+  //validate form
+  if (!isValidate) return;
   try {
-    await productService.createProduct(product);
-    alert("Thêm thành công");
+    // 1. DOM lấy input
+    var id = document.getElementById("productId").value;
+    var name = document.getElementById("productName").value;
+    var price = document.getElementById("productPrice").value;
+    var screen = document.getElementById("productScreen").value;
+    var backCamera = document.getElementById("productBackCamera").value;
+    var frontCamera = document.getElementById("productFrontCamera").value;
+    var img = document.getElementById("productImg").value;
+    var desc = document.getElementById("productDesc").value;
+    var type = document.getElementById("productType").value;
+    //2. tạo lớp đối tượng products
+    var newProduct = new Product(
+      id,
+      name,
+      price,
+      screen,
+      backCamera,
+      frontCamera,
+      img,
+      desc,
+      type
+    );
+
+    await productService.createProduct(newProduct);
+    // alert("Thêm thành công");
     fetchProductsList();
   } catch (err) {
     console.log(err);
@@ -95,10 +98,9 @@ async function fetchProductsList() {
 
   document.getElementById("loader").classList.remove("d-none");
   document.getElementById("loader").classList.add("d-block");
-  var promise = productService.fetchProducts();
 
   try {
-    var res = await promise;
+    var res = await productService.fetchProducts();
     productList = mapProductList(res.data);
     renderProducts();
   } catch (err) {
@@ -164,7 +166,7 @@ function deleteProduct(id) {
   });
 }
 
-async function getUpdateProduct(id) {
+function getUpdateProduct(id) {
   productService
     .fetchProductsDetail(id)
     .then(function (res) {
@@ -351,26 +353,33 @@ function validateForm() {
       errorProduct: "idError",
       regexp: testRegexpNumber,
     });
+
   var nameValid = required(productName, { errorProduct: "nameError" });
   required(productPrice, { errorProduct: "priceError" }) &&
     patternNumber(productPrice, {
       errorProduct: "priceError",
       regexp: testRegexpNumber,
     });
+
   var screenValid = required(productScreen, { errorProduct: "screenError" });
+
   var backCameraValid = required(productBackCamera, {
     errorProduct: "backCameraError",
   });
+
   var frontCameraValid = required(productFrontCamera, {
     errorProduct: "frontCameraError",
   });
+
   var imgValid =
     required(productImg, { errorProduct: "imgError" }) &&
     patternLink(productImg, {
       errorProduct: "imgError",
       regexp: testRegexpLink,
     });
+
   var descValid = required(productDesc, { errorProduct: "descError" });
+
   var typeValid = required(productType, { errorProduct: "typeError" });
 
   var isFormValid =
@@ -381,7 +390,6 @@ function validateForm() {
     frontCameraValid &&
     imgValid &&
     descValid &&
-    typeValid &&
-    isFormValid;
+    typeValid;
   return isFormValid;
 }
