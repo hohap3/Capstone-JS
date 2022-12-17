@@ -134,13 +134,14 @@ function mapProductList(local) {
 
 function deleteProduct(id) {
   Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
+    title: "Xóa sản phẩm",
+    text: "Bạn có chắc chắn muốn xóa sản phẩm này không?",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!",
+    confirmButtonText: "Xác nhận",
+    cancelButtonText: "Hủy",
   }).then(function (result) {
     if (result.isConfirmed) {
       productService
@@ -149,7 +150,7 @@ function deleteProduct(id) {
           console.log(res);
           fetchProductsList();
           Swal.fire({
-            title: "Deleted!",
+            title: "Đã xóa",
             timer: 2000,
             icon: "success",
           });
