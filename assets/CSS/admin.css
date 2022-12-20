@@ -1,0 +1,30 @@
+#tblProductsList tr td,
+thead tr th {
+  font-size: 1.6rem;
+}
+
+#tblProductsList button {
+  font-size: 1.4rem;
+}
+
+.search-input,
+.btn-add {
+  font-size: 1.4rem;
+}
+
+.model-element h1 {
+  font-size: 1.6rem !important;
+}
+
+.model-element label,
+.model-element input,
+.model-element select,
+.model-element button {
+  font-size: 1.4rem;
+}
+
+.action-event {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}

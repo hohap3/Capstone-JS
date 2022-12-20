@@ -32,6 +32,7 @@
     />
 
     <!-- Link file CSS -->
+    <link rel="stylesheet" href="./assets/CSS/base.css" />
     <link rel="stylesheet" href="./assets/CSS/admin.css" />
     <link rel="stylesheet" href="./assets/CSS/header.css" />
   </head>
@@ -105,11 +106,10 @@
             </div>
           </div>
         </div>
-
-        <h2 class="mt-5 mb-5">QUẢN LÝ SẢN PHẨM</h2>
       </header>
 
       <!-- HEADER -->
+      <h2 class="mt-5 mb-5">QUẢN LÝ SẢN PHẨM</h2>
 
       <!-- TAB PANES -->
       <div class="tab-content mt-5">
@@ -121,7 +121,7 @@
             </button> -->
             <button
               type="button"
-              class="btn btn-primary"
+              class="btn btn-primary btn-add"
               data-bs-toggle="modal"
               data-bs-target="#addProductModal"
             >
@@ -137,7 +137,7 @@
               aria-labelledby="modalAddProductLabel"
               aria-hidden="true"
             >
-              <div class="modal-dialog modal-md">
+              <div class="model-element modal-dialog modal-md">
                 <form id="form" class="modal-content">
                   <div class="modal-header">
                     <h1 class="modal-title fs-5" id="modalAddProductLabel">
@@ -275,7 +275,7 @@
                     <button
                       id="btnCreate"
                       type="button"
-                      class="btn btn-primary"
+                      class="btn btn-primary text-white"
                       onclick="submitForm()"
                     >
                       Thêm
@@ -304,7 +304,7 @@
             <form class="d-flex" role="search">
               <input
                 oninput="searchProducts(event)"
-                class="form-control me-2"
+                class="form-control me-2 search-input"
                 type="search"
                 placeholder="Nhập loại sản phẩm"
                 aria-label="Search"
