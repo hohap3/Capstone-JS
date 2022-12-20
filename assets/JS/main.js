@@ -334,7 +334,9 @@ function handleChangeQuantity(id, e) {
 function handleDeleteCartItem(id) {
   if (!id) return;
 
-  if (cart.length < 1) return;
+  var cartList = getLocalStorageData(CART_LOCAL_NAME);
+
+  if (cartList.length < 1) return;
 
   var index = findIndexCart(id.toString());
   if (index < 0) {
@@ -342,13 +344,13 @@ function handleDeleteCartItem(id) {
     return;
   }
 
-  cart.splice(index, 1);
+  cartList.splice(index, 1);
 
   // save localStorage
-  saveLocalStorage(CART_LOCAL_NAME, cart);
+  saveLocalStorage(CART_LOCAL_NAME, cartList);
 
   // Render cart
-  renderCart(cart);
+  renderCart(cartList);
 
   // Show cart info
   showCartInfo();
