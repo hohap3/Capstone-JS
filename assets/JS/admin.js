@@ -62,7 +62,7 @@ function renderProducts(data) {
                 <td>${data[i].img}</td>
                 <td>${data[i].desc}</td>
                 <td>${data[i].type}</td>
-                <td>
+                <td class="action-event" >
                   <button 
                   onclick="deleteProduct(${data[i].id})"
                   class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
